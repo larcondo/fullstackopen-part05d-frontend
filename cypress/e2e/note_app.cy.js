@@ -62,17 +62,17 @@ describe('Note app', function() {
     describe('and a note exists', function() {
       beforeEach(function() {
         cy.createNote({
-          content: 'another note cypress (cy command)',
+          content: 'another note cypress',
           important: true
         })
       })
 
       it('it can be made not important', function() {
-        cy.contains('another note cypress')
+        cy.contains('another note cypress').parent().find('button')
           .contains('make not important')
           .click()
 
-        cy.contains('another note cypress')
+        cy.contains('another note cypress').parent().find('button')
           .contains('make important')
       })
     })
