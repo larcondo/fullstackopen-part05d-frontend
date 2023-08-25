@@ -76,5 +76,26 @@ describe('Note app', function() {
           .contains('make important')
       })
     })
+
+    describe('and several notes exist', function() {
+      beforeEach(function() {
+        cy.createNote({ content: 'first note', important: false })
+        cy.createNote({ content: 'second note', important: false })
+        cy.createNote({ content: 'third note', important: false })
+      })
+
+      it('one of those can be made important', function() {
+        // // normal (without a span)
+        // cy.contains('second note')
+        //   .contains('make important')
+        //   .click()
+
+        // cy.contains('second note')
+        //   .contains('make not important')
+        cy.contains('second note').parent().find('button').click()
+        cy.contains('second note').parent().find('button')
+          .should('contain', 'make not important')
+      })
+    })
   })
 })
